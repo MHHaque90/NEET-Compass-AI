@@ -1,0 +1,60 @@
+# ─── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.coverage.*
+*.coverage
+.cache/
+
+# ─── Environment / secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─── Data (never commit source/derived data) ───────────────────────────────────
+data/raw/*
+data/raw/evidence/
+data/processed/*
+data/exports/*
+data/cache/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/exports/.gitkeep
+!data/cache/.gitkeep
+
+# ─── IDE / OS ──────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ─── Docker ────────────────────────────────────────────────────────────────────
+docker/postgres/data/
+
+# ─── ML artifacts ──────────────────────────────────────────────────────────────
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.safetensors
+mlruns/

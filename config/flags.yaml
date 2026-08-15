@@ -1,0 +1,56 @@
+# Feature flag configuration for NEET Compass AI.
+#
+# Two sections:
+#   definitions:  the flag catalogue (source of truth for what flags exist).
+#                 Each entry: description, category, default, owner, rules.
+#   overrides:    deploy-baseline toggles read by the ConfigFileFlagProvider.
+#
+# Precedence at evaluation time (highest wins):
+#   ENV > MEMORY > DATABASE > CONFIG_FILE (this section) > code default
+#
+# Override any flag at runtime without a deploy:
+#   export FF_ENGINES_RULE=true
+# or set it in the feature_flags database table.
+
+version: 1
+
+definitions:
+  # ── Rule Engine (deterministic scoring from closing ranks) ─────────────
+  engines.rule:
+    description: Enables the deterministic rule-based scoring engine.
+    category: RULE_ENGINE
+    default: false
+    owner: data-science
+
+  # ── ML Engine (statistical / trained scoring model) ────────────────────
+  engines.ml:
+    description: Enables the machine-learning scoring engine.
+    category: ML_ENGINE
+    default: false
+    owner: data-science
+
+  # ── LLM Engine (natural-language explanations) ─────────────────────────
+  engines.llm:
+    description: Enables the LLM-backed explanation engine.
+    category: LLM_ENGINE
+    default: false
+    owner: platform
+
+  # ── Experimental features ──────────────────────────────────────────────
+  # Example showing targeting rules: a 10% rollout bucketed by request_id.
+  # Any experimental.<name> flag works without being listed here only if a
+  # definition is registered; add definitions as features are created.
+  experimental.choice_filling_v2:
+    description: New choice-filling order algorithm (experimental).
+    category: EXPERIMENTAL
+    default: false
+    owner: platform
+    rules:
+      - type: percentage
+        key: request_id
+        percentage: 10
+
+overrides:
+  # Deploy-baseline toggles. Uncomment to force a state via this file.
+  # engines.rule: true
+  # engines.llm: false

@@ -1,0 +1,111 @@
+[project]
+name = "neet-compass-ai"
+version = "0.2.0"
+description = "Admission Intelligence Platform for NEET MBBS/BDS counselling."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "NEET Compass AI" }]
+dependencies = []
+
+# Runtime dependencies are pinned in requirements.txt (single source of truth
+# for pip/Docker). PyPI metadata is intentionally kept empty of deps so the
+# repo can be installed with `pip install -e . --no-deps` for import tooling.
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["backend/tests", "feature_flags/tests", "services/tests", "config/tests", "tests"]
+pythonpath = ["backend", "feature_flags", "services", "."]
+filterwarnings = [
+    "error::DeprecationWarning",
+    "ignore::DeprecationWarning:alembic.*",
+]
+markers = [
+    "integration: Integration test requiring PostgreSQL",
+]
+
+[tool.coverage.run]
+# Unit coverage gate. DB-backed modules (ORM models, SQLAlchemy repos, ETL
+# loaders) are exercised by the integration suite (tests/) in Phase 2, so they
+# are excluded here; the gate guards the domain/application core instead.
+source = ["app"]
+omit = [
+    "*/app/api/*",
+    "*/app/core/database.py",
+    "*/app/main.py",
+    "*/app/infrastructure/db/*",
+    "*/app/infrastructure/ml/*",
+    "*/app/infrastructure/etl/loaders/*",
+    "*/app/infrastructure/etl/pipelines/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+include = '\.pyi?$'
+extend-exclude = "alembic/versions"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["backend", "tests", "etl", "scripts", "feature_flags", "services", "config"]
+extend-exclude = ["backend/alembic/versions"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",       # pycodestyle errors/warnings
+    "F",            # pyflakes
+    "I",            # isort
+    "B",            # bugbear
+    "UP",           # pyupgrade
+    "SIM",          # flake8-simplify
+    "RUF",          # ruff-specific
+    "PTH",          # pathlib
+    "C4",           # flake8-comprehensions
+    "PERF",         # performance
+    "PYI",          # typing stubs
+    "D",            # pydocstyle (docstrings)
+]
+ignore = [
+    "D100", "D101", "D102", "D103", "D104", "D105", "D107",  # docstrings enforced at module level only in critical files
+    "D200", "D202", "D203", "D204", "D205", "D211", "D212", "D213",  # PEP257 summary-first-line style
+    "D400", "D401", "D415",
+    "PERF203",
+]
+unfixable = ["B", "C4"]
+
+[tool.ruff.lint.per-file-ignores]
+"backend/alembic/*" = ["D", "SIM", "E501"]
+"tests/*" = ["D", "B", "S", "C4"]
+"feature_flags/tests/*" = ["D", "B", "S", "C4"]
+"services/tests/*" = ["D", "B", "S", "C4"]
+"config/tests/*" = ["D", "B", "S", "C4"]
+"scripts/*" = ["D", "S"]
+# FastAPI's Depends()/settings in argument defaults is idiomatic, not a B008 bug.
+"backend/app/api/*" = ["B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+# `line-length` at [tool.ruff] applies to both lint and format.
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "backend"
+exclude = ["backend/alembic", "scripts"]
+
+# Test suites are intentionally not strictly typed (pytest fixtures are
+# untyped); mirror the ruff per-file-ignores so the flag system stays
+# type-clean without polluting tests with annotation churn.
+[[tool.mypy.overrides]]
+module = ["feature_flags.tests.*", "services.tests.*", "config.tests.*", "tests.*"]
+disable_error_code = ["no-untyped-def", "no-untyped-call"]

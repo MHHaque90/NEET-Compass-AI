@@ -1,0 +1,40 @@
+# Pipeline definitions for the NEET Compass ETL runner (etl/run.py).
+#
+# `column_map` translates raw release headers to canonical columns consumed by
+# AllotmentTransformer. Column names differ across MCC (AIQ) and state releases,
+# so each source needs its own map. Add one entry per release format.
+
+pipelines:
+  aiq_cutoffs:
+    source:
+      type: excel
+      path: data/raw/mcc/aiq_cutoff_{year}.xlsx
+    column_map:
+      "Institute Code": college_code
+      "Institute Name": _ignore
+      "State": _ignore
+      "Course": course
+      "Round": round_number
+      "Quota": quota_type
+      "Category": category
+      "Gender": gender
+      "Opening Rank": opening_rank
+      "Closing Rank": closing_rank
+      "Opening Marks": opening_marks
+      "Closing Marks": closing_marks
+    batch_size: 1000
+
+  state_cutoffs_example:
+    source:
+      type: csv
+      path: data/raw/state/{state}_cutoff_{year}.csv
+    column_map:
+      "College Code": college_code
+      "Course": course
+      "Quota": quota_type
+      "Category": category
+      "Gender": gender
+      "Round": round_number
+      "Closing AIR": closing_rank
+      "Opening AIR": opening_rank
+    batch_size: 500

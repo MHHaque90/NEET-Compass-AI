@@ -1,0 +1,5 @@
+'from __future__ import annotations'  
+'import json'  
+'class JsonFormatter:'  
+'    def __init__(self, fmt: str = ...) - ...'  
+'    def format(self, record: logging.LogRecord) - ...' 

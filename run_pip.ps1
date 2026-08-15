@@ -1,0 +1,1 @@
+powershell -command "cd 'E:\NEET Compass AI\backend' && pip list 2>&1 | grep -i -E 'psycopg|sqlalchemy|alembic'"

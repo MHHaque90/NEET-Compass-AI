@@ -1,0 +1,29 @@
+# Repository-level .dockerignore for the backend build context
+**/__pycache__/
+**/*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.git/
+.gitignore
+
+# Data must never enter the image
+data/
+!data/cache/.gitkeep
+
+.env
+.env.*
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Docs / frontend not needed by the backend image
+docs/
+frontend/
+database/

@@ -1,0 +1,582 @@
+# NEET Compass AI - Official Source Registry
+#
+# RESEARCH REGISTRY ONLY.
+#
+# This file is the machine-readable inventory of official data sources for the
+# NEET UG (MBBS/BDS) counselling domain. It is documentation for the official-
+# source intelligence layer (docs/data-sources/) and MUST NOT be used to
+# scrape, download, or ingest data at runtime. No scraping logic lives here.
+#
+# Source of truth: docs/data-sources/source-registry.md
+#
+# Research methodology:
+#   * Only sources actually verified during research are recorded.
+#   * A URL that is real but whose exact purpose could not be fully verified is
+#     marked VERIFIED_URL_PURPOSE_NOT_FULLY_VERIFIED.
+#   * A source that could not be verified is marked NOT_VERIFIED and carries no
+#     official_url.
+#   * No URL is reconstructed from memory and no third-party source is
+#     silently substituted for an official source.
+#
+# Research / access date: 2026-08-12
+
+version: 1
+
+enums:
+  verification_statuses:
+    - VERIFIED
+    - VERIFIED_URL_PURPOSE_NOT_FULLY_VERIFIED
+    - NOT_VERIFIED
+  priorities:
+    - P0
+    - P1
+  authority_levels:
+    - REGULATORY
+    - EXAMINATION
+    - STATE_AUTHORITY
+    - CENTRAL_INSTITUTION
+  scopes:
+    - NATIONAL
+    - ALL_INDIA
+    - STATE_QUOTA
+    - INSTITUTIONAL
+  courses:
+    - MBBS
+    - BDS
+    - MBBS+BDS
+    - MBBS+BDS+NURSING
+  publication_statuses:
+    - PUBLISHED
+    - NOT_VERIFIED
+  formats:
+    - PDF
+    - XLSX
+    - CSV
+    - HTML
+    - MULTIPLE
+    - NOT_VERIFIED
+
+sources:
+  # ── MCC (Medical Counselling Committee) ─────────────────────────────────────
+  - source_id: mcc_official_base
+    source_name: MCC Official Portal
+    authority: Medical Counselling Committee
+    official_url: https://mcc.nic.in/
+    dataset: Base portal for all-India quota counselling publications
+    scope: ALL_INDIA
+    course: MBBS+BDS+NURSING
+    state: null
+    year_support: "2026 (active); per-year archive NOT VERIFIED"
+    format: HTML
+    authority_level: REGULATORY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Statutory body under MoHFW that runs all-India quota (AIQ) NEET UG
+      counselling. Domain verified as the official MCC portal. Live re-check
+      2026-08-12 (Sprint 3.1A): first-contact GET returned HTTP 200 text/html;
+      automated full downloads from the same session rejected HTTP 403 (server
+      bot protection) - see data/raw/evidence/2026-08-12/mcc_live_evidence.json.
+
+  - source_id: mcc_ug_counselling
+    source_name: MCC UG Medical Counselling
+    authority: Medical Counselling Committee
+    official_url: https://mcc.nic.in/ug-medical-counselling/
+    dataset: NEET UG counselling - seat matrix, information bulletin, allotment
+      result, vacancy, joined candidates, participating institutes, round info
+    scope: ALL_INDIA
+    course: MBBS+BDS+NURSING
+    state: null
+    year_support: "2026 (round 1 seat matrix and bulletin verified); earlier NOT VERIFIED"
+    format: MULTIPLE
+    authority_level: REGULATORY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Page verified 2026-08-09: NEET UG Counselling 2026 Round 1 registration
+      started; Seat Matrix NEET UG MBBS BDS & BSc Nursing Round 1 (PDF) and UG
+      Information Bulletin 2026 published. Individual allotment-result, vacancy
+      and joined-candidate URLs were NOT separately verified this research pass.
+      Sprint 3.1A (2026-08-12): live page 200 on first contact; automated
+      downloads rejected HTTP 403 - treat allotment/seat/vacancy file URLs as
+      UNVERIFIED until verified in an interactive session.
+
+  - source_id: mcc_ug_archive
+    source_name: MCC UG Counselling Archive
+    authority: Medical Counselling Committee
+    official_url: https://mcc.nic.in/archive-ug/
+    dataset: Historical NEET UG counselling releases (2021-2025) - information
+      bulletins, seat matrices, allotment results, vacancies, joined/admitted
+      candidate lists, schedules; participating-institute reports (2025-2026)
+    scope: ALL_INDIA
+    course: MBBS+BDS+NURSING
+    state: null
+    year_support: "2021-2025 per-year document families verified available"
+    format: MULTIPLE
+    authority_level: REGULATORY
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Archive page verified 2026-08-09 (three-day crawl). Seat matrices,
+      allotment results, vacancy documents, and information bulletins verified
+      present for every year 2021-2025. Joined/admitted candidate lists found
+      for 2021, 2024, 2025 only (not found for 2022, 2023). Participating
+      institute reports found for 2025 (2026 live on the counselling page).
+      See docs/data-sources/mcc-historical-dataset-matrix.md.
+      Sprint 3.1A (2026-08-12): page reachable HTTP 200; automated downloads
+      rejected HTTP 403 (server bot protection). Allotment documents are served
+      as PDF (some XLS); a machine-readable per-round allotment CSV is NOT
+      confirmed from the official archive - allotments contract is ready but
+      its real source file is UNVERIFIED.
+
+  - source_id: mcc_ug_participating_institutes
+    source_name: MCC UG Participating Institute Details
+    authority: Medical Counselling Committee
+    official_url: https://mcc.nic.in/ug-medical-counselling/
+    dataset: Participating institutes for NEET UG counselling (institute,
+      institute code, state, management, course) - dynamic report on the UG page
+    scope: ALL_INDIA
+    course: MBBS+BDS+NURSING
+    state: null
+    year_support: "2025 (archive report link) and 2026 (live report) verified"
+    format: MULTIPLE
+    authority_level: REGULATORY
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Participating Institute Details UG 2025 report accessible from the
+      archive page; NEET UG 2026 participating-institute report is generated
+      dynamically. Institute codes for seat-matrix joins come from this report
+      or the NMC list, not from the seat matrix itself.
+
+  # ── NTA (National Testing Agency) ───────────────────────────────────────────
+  - source_id: nta_official_base
+    source_name: NTA Official Portal
+    authority: National Testing Agency
+    official_url: https://www.nta.ac.in/
+    dataset: Agency portal (notices, exam information, links to NEET UG portal)
+    scope: NATIONAL
+    course: MBBS+BDS
+    state: null
+    year_support: "2026 (portal active); per-year datasets NOT VERIFIED"
+    format: HTML
+    authority_level: EXAMINATION
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      NTA conducts the NEET (UG) examination. Domain verified as the official
+      agency portal. Candidate PII is out of scope and MUST NOT be collected.
+
+  - source_id: nta_neet_ug
+    source_name: NEET UG Official Portal
+    authority: National Testing Agency
+    official_url: https://neet.nta.nic.in/
+    dataset: NEET UG - information bulletin, result, notices, statistics
+    scope: NATIONAL
+    course: MBBS+BDS
+    state: null
+    year_support: "2026 (portal live); historical NOT VERIFIED"
+    format: MULTIPLE
+    authority_level: EXAMINATION
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Domain verified as the official NEET UG portal. Specific bulletin and
+      result dataset URLs were NOT individually verified this research pass.
+
+  # ── NMC (National Medical Commission) ───────────────────────────────────────
+  - source_id: nmc_college_list
+    source_name: NMC List of Medical Colleges Teaching MBBS
+    authority: National Medical Commission
+    official_url: https://www.nmc.org.in/information-desk/colleges-teaching-mbbs/
+    dataset: MBBS college list per NEET UG admission year - college identity,
+      recognition, annual intake, management, university, state, status
+    scope: NATIONAL
+    course: MBBS
+    state: null
+    year_support: "2023-24 and 2024-25 lists verified published"
+    format: PDF
+    authority_level: REGULATORY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Lists for 2023-24 and 2024-25 verified published. Verified PDF:
+      media.nmc.org.in/public/uploads/medical-college-list/NEET UG MBBS
+      adm_2024-25 College List.pdf. NMC annual/approved intake is NOT
+      automatically equivalent to MCC/state counselling seats.
+
+  - source_id: nmc_medical_colleges
+    source_name: NMC List of Medical Colleges (search page)
+    authority: National Medical Commission
+    official_url: https://www.nmc.org.in/medical-colleges/
+    dataset: Searchable list of medical colleges (recognition, management,
+      university, state, status)
+    scope: NATIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED (page live)"
+    format: HTML
+    authority_level: REGULATORY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Search page verified. Recommended viewing in Chrome. Per-college record
+      completeness was not exhaustively verified this research pass.
+
+  - source_id: nmc_eligibility
+    source_name: NMC Medical College Department (MBBS eligibility)
+    authority: National Medical Commission
+    official_url: https://www.nmc.org.in/information-desk/medical-college-department/
+    dataset: MBBS admission eligibility criteria; link to MBBS college list
+    scope: NATIONAL
+    course: MBBS
+    state: null
+    year_support: "2026 (amended eligibility criteria published)"
+    format: HTML
+    authority_level: REGULATORY
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Page verified; includes amended MBBS admission eligibility criteria and
+      the list of medical colleges teaching MBBS.
+
+  # ── NDC (National Dental Commission) ────────────────────────────────────────
+  - source_id: ndc_official_base
+    source_name: National Dental Commission Official Portal
+    authority: National Dental Commission
+    official_url: https://ndcindia.gov.in/
+    dataset: Base portal for dental education and profession regulation
+    scope: NATIONAL
+    course: BDS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: HTML
+    authority_level: REGULATORY
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      NDC established under the National Dental Commission Act, 2023 and is the
+      current apex dental regulator. Dental Council of India (DCI) is the
+      historical regulator and is NOT the current authority.
+
+  - source_id: ndc_dental_colleges
+    source_name: NDC Dental Colleges List
+    authority: National Dental Commission
+    official_url: https://ndcindia.gov.in/dental-colleges-list/
+    dataset: BDS dental colleges - recognition, intake, institution info, status
+    scope: NATIONAL
+    course: BDS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: HTML
+    authority_level: REGULATORY
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Dental colleges list page verified. Per-college record completeness was
+      not exhaustively verified this research pass.
+
+  # ── State counselling authorities ───────────────────────────────────────────
+  - source_id: mcc_state_maharashtra
+    source_name: MAHA CET Cell (State CET Cell)
+    authority: State Common Entrance Test Cell, Maharashtra
+    official_url: https://cetcell.mahacet.org/
+    dataset: Maharashtra NEET UG counselling - state quota MBBS/BDS admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Maharashtra
+    year_support: "2026 (registration announced); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official state counselling authority for Maharashtra NEET UG state quota.
+
+  - source_id: mcc_state_karnataka
+    source_name: Karnataka Examinations Authority (KEA)
+    authority: Karnataka Examinations Authority
+    official_url: https://cetonline.karnataka.gov.in/kea/
+    dataset: Karnataka NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Karnataka
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official counselling authority for Karnataka NEET UG.
+
+  - source_id: mcc_state_tamil_nadu
+    source_name: TN Medical Selection
+    authority: Directorate of Medical Education, Tamil Nadu
+    official_url: https://www.tnmedicalselection.net/
+    dataset: Tamil Nadu NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Tamil Nadu
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official state counselling portal for Tamil Nadu.
+
+  - source_id: mcc_state_uttar_pradesh
+    source_name: UPMU UP NEET UG
+    authority: Directorate of Medical Education, Uttar Pradesh
+    official_url: https://upneet.gov.in/
+    dataset: Uttar Pradesh NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Uttar Pradesh
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official UP NEET UG portal (upneet.gov.in). DME UP portal bqnmc.up.gov.in
+      also verified as an official UP medical counselling site.
+
+  - source_id: mcc_state_west_bengal
+    source_name: West Bengal Medical Counselling Committee (WBMCC)
+    authority: West Bengal Medical Counselling Committee
+    official_url: https://wbmcc.nic.in/
+    dataset: West Bengal NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: West Bengal
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official West Bengal medical counselling committee portal.
+
+  - source_id: mcc_state_rajasthan
+    source_name: Rajasthan Medical Education Society (RMEDS)
+    authority: Rajasthan Medical Education Society
+    official_url: https://rmeds.rajasthan.gov.in/
+    dataset: Rajasthan NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Rajasthan
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official state counselling authority for Rajasthan.
+
+  - source_id: mcc_state_madhya_pradesh
+    source_name: Directorate of Medical Education, Madhya Pradesh
+    authority: Directorate of Medical Education, Madhya Pradesh
+    official_url: https://dme.mponline.gov.in/
+    dataset: Madhya Pradesh NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Madhya Pradesh
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official MP DME counselling portal.
+
+  - source_id: mcc_state_gujarat
+    source_name: ACPMEC Gujarat (Admission Committee for PG/UG Medical Courses)
+    authority: Admission Committee for Professional UG Medical Educational Courses
+    official_url: https://www.medadmgujarat.org/
+    dataset: Gujarat NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Gujarat
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official counselling authority for professional UG medical courses,
+      Gujarat.
+
+  - source_id: mcc_state_bihar
+    source_name: BCECE Board Bihar
+    authority: Bihar Combined Entrance Competitive Examination (BCECE) Board
+    official_url: https://bceceboard.bihar.gov.in/
+    dataset: Bihar NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Bihar
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official Bihar counselling authority.
+
+  - source_id: mcc_state_telangana
+    source_name: KNRUHS Telangana
+    authority: Kaloji Narayana Rao University of Health Sciences
+    official_url: https://knruhs.telangana.gov.in/
+    dataset: Telangana NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Telangana
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official Telangana NEET UG counselling authority.
+
+  - source_id: mcc_state_andhra_pradesh
+    source_name: Dr. NTR University of Health Sciences
+    authority: Dr. NTR University of Health Sciences
+    official_url: https://ntruhs.ap.nic.in/
+    dataset: Andhra Pradesh NEET UG counselling - state quota admissions
+    scope: STATE_QUOTA
+    course: MBBS+BDS
+    state: Andhra Pradesh
+    year_support: "2026 (portal active); archive NOT VERIFIED"
+    format: HTML
+    authority_level: STATE_AUTHORITY
+    priority: P0
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Official Andhra Pradesh medical counselling authority.
+
+  # ── Central institutions ────────────────────────────────────────────────────
+  - source_id: central_aiims_admissions
+    source_name: AIIMS Admissions
+    authority: All India Institute of Medical Sciences (AIIMS)
+    official_url: https://www.aiimsexams.ac.in/
+    dataset: AIIMS admissions portal (UG admissions via NEET UG + MCC counselling)
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: HTML
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      AIIMS UG MBBS seats are now filled through NEET UG + MCC counselling.
+      Portal verified as the AIIMS admissions site.
+
+  - source_id: central_bhu
+    source_name: Banaras Hindu University
+    authority: Banaras Hindu University
+    official_url: https://www.bhu.ac.in/
+    dataset: BHU institute portal (MBBS admissions via NEET UG + MCC counselling)
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: HTML
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      University portal verified. BHU IMS MBBS seats filled via NEET UG + MCC.
+
+  - source_id: central_jipmer
+    source_name: JIPMER
+    authority: Jawaharlal Institute of Postgraduate Medical Education and Research
+    official_url: https://jipmer.edu.in/
+    dataset: JIPMER institute portal (MBBS admissions via NEET UG + MCC counselling)
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: HTML
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: VERIFIED
+    publication_status: PUBLISHED
+    notes: |
+      Institute portal verified. JIPMER MBBS seats filled via NEET UG + MCC.
+
+  - source_id: central_amu
+    source_name: Aligarh Muslim University (AMU)
+    authority: Aligarh Muslim University
+    official_url: null
+    dataset: AMU MBBS admissions
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: NOT_VERIFIED
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: NOT_VERIFIED
+    publication_status: NOT_VERIFIED
+    notes: |
+      Not verified during this research pass.
+
+  - source_id: central_esic
+    source_name: ESIC Medical Institutions
+    authority: Employees' State Insurance Corporation
+    official_url: null
+    dataset: ESIC medical colleges (MBBS seats via MCC counselling)
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: NOT_VERIFIED
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: NOT_VERIFIED
+    publication_status: NOT_VERIFIED
+    notes: |
+      Not verified during this research pass.
+
+  - source_id: central_delhi_institutions
+    source_name: Delhi Institutions (MCC-administered)
+    authority: Medical Counselling Committee (Delhi quota pool)
+    official_url: null
+    dataset: Delhi-based institutions administered through MCC counselling
+    scope: INSTITUTIONAL
+    course: MBBS
+    state: null
+    year_support: "NOT VERIFIED"
+    format: NOT_VERIFIED
+    authority_level: CENTRAL_INSTITUTION
+    priority: P1
+    verification_status: NOT_VERIFIED
+    publication_status: NOT_VERIFIED
+    notes: |
+      Not verified during this research pass.

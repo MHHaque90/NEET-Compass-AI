@@ -1,0 +1,14 @@
+# NEET Compass AI - Runtime Dependencies
+# Single source of truth for pip install -e . --no-deps
+# See: pyproject.toml [project] dependencies = []
+
+pydantic-settings >= 2.7.0
+PyYAML >= 6.0
+openpyxl >= 3.0.0  # test: Excel source reading
+psycopg >= 3.0.0  # runtime: PostgreSQL driver (matching database URL +psycopg)
+SQLAlchemy >= 2.0.0
+alembic >= 1.10.0
+pytest >= 7.0.0
+ruff >= 0.1.0
+mypy >= 1.0.0
+black >= 23.0.0
