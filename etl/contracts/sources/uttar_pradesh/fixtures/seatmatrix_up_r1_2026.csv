@@ -1,0 +1,7 @@
+StateName,Institute,Course,Category,Quota,TotalSeats
+UttarPradesh,ASCSR Lucknow Medical College,MBBS,OP,AI,200
+UttarPradesh,ASCSR Lucknow Medical College,MBBS,BC,AI,100
+UttarPradesh,ASCSR Lucknow Medical College,MBBS,GN,SO,300
+UttarPradesh,Kashi Institute,MBBS,OP,AI,150
+UttarPradesh,Kashi Institute,MBBS,BC,AI,75
+UttarPradesh,Kashi Institute,MBBS,GN,SO,250
