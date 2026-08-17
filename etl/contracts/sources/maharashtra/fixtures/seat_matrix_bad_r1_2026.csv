@@ -1,0 +1,4 @@
+StateName,Institute,Course,Category,Quota,TotalSeats
+Maharashtra,"","MBBS","OP","AI",100
+Maharashtra,"AIIMS Mumbai","","AI",150
+Maharashtra,"AIIMS Mumbai","MBBS","INVALID_CAT","AI",150

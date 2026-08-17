@@ -1,0 +1,11 @@
+Institute,Course,Category,Quota,Round,OpeningRank,ClosingRank,SeatCount
+"ASCSR Govt Medical College, Nellore","MBBS","OP","AI","Round 1",1,50,50
+"ASCSR Govt Medical College, Nellore","MBBS","BC","AI","Round 1",51,100,50
+"ASCSR Govt Medical College, Nellore","MBBS","GN","SO","Round 1",101,200,100
+"ASCSR Govt Medical College, Nellore","MBBS","ST","MM","Round 1",8001,8020,20
+"AIIMS Mumbai","MBBS","OP","AI","Round 1",1,150,150
+"AIIMS Mumbai","MBBS","BC","AI","Round 1",151,300,75
+"AIIMS Mumbai","MBBS","GN","SO","Round 1",301,500,200
+"AIIMS Mumbai","BDS","OP","AI","Round 1",1,80,80
+"AIIMS Mumbai","BDS","BC","AI","Round 1",81,160,40
+"AIIMS Mumbai","BDS","GN","SO","Round 1",161,240,100

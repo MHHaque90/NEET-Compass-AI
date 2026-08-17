@@ -1,0 +1,11 @@
+StateName,Institute,Course,Category,Quota,TotalSeats
+Maharashtra,"ASCSR Govt Medical College, Nellore","MBBS","OP","AI",100
+Maharashtra,"ASCSR Govt Medical College, Nellore","MBBS","BC","AI",50
+Maharashtra,"ASCSR Govt Medical College, Nellore","MBBS","GN","SO",100
+Maharashtra,"ASCSR Govt Medical College, Nellore","MBBS","ST","MM",20
+Maharashtra,"AIIMS Mumbai","MBBS","OP","AI",150
+Maharashtra,"AIIMS Mumbai","MBBS","BC","AI",75
+Maharashtra,"AIIMS Mumbai","MBBS","GN","SO",200
+Maharashtra,"AIIMS Mumbai","BDS","OP","AI",80
+Maharashtra,"AIIMS Mumbai","BDS","BC","AI",40
+Maharashtra,"AIIMS Mumbai","BDS","GN","SO",100
