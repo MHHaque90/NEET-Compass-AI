@@ -11,1287 +11,1195 @@
 #   - Which years are available?
 #   - Which targets are supported?
 #   - What limitations exist?
+#
+# Sprint 3.9 Update: Added lifecycle_stage and evidence_status fields
+# for historical evidence acquisition framework.
+# Only MCC 2025 remains verified modelling-ready.
 
-version: 1
-
-# Readiness classifications (matching Phase 2)
-readiness_levels:
-  - READY
-  - READY_WITH_LIMITATIONS
-  - NOT_READY
-
-# Verification statuses (from data_sources.yaml)
-verification_statuses:
-  - VERIFIED
-  - VERIFIED_URL_PURPOSE_NOT_FULLY_VERIFIED
-  - NOT_VERIFIED
-
-# Dataset entries: one per source_id × dataset × year × round
+version: 2
+readiness_levels: [READY, READY_WITH_LIMITATIONS, NOT_READY]
+verification_statuses: [VERIFIED, VERIFIED_URL_PURPOSE_NOT_FULLY_VERIFIED, NOT_VERIFIED,
+  AUTOMATED_DOWNLOAD_BLOCKED]
 datasets:
-  # MCC - Medical Counselling Committee
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: seat_matrix
-    year: 2025
-    round: "Round 1"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY
-    contract_version: "1.1.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations: []
-    quality_gates_passed: 15
-    quality_gates_total: 15
-    notes: "Full contract v1.1.0, adapter, validator, provenance, tests. Only Round 1 seat matrix."
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: allotments
-    year: 2025
-    round: "Round 3"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY
-    contract_version: "1.1.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations: []
-    quality_gates_passed: 15
-    quality_gates_total: 15
-    notes: "Full contract v1.1.0, adapter, validator, provenance, tests. PII blocklist enforced."
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: seat_matrix
-    year: 2021
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence (fixtures, raw data, tests)"
-      - "Config claims availability but not ingested"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-    notes: "Documented in data_sources.yaml as available but zero repository evidence."
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: seat_matrix
-    year: 2022
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: seat_matrix
-    year: 2023
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: seat_matrix
-    year: 2024
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: allotments
-    year: 2021
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Config claims availability but not ingested"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-    notes: "Documented in data_sources.yaml as available but zero repository evidence."
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: allotments
-    year: 2022
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: allotments
-    year: 2023
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_ug_archive
-    source_name: MCC UG Counselling Archive
-    authority: Medical Counselling Committee
-    dataset: allotments
-    year: 2024
-    round: "All"
-    course: MBBS+BDS+NURSING
-    quota: ALL_INDIA
-    category: ALL
-    verification_status: PARTIALLY_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  # Maharashtra - MAHA CET Cell
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY_WITH_LIMITATIONS
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: true
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations:
-      - "Only test fixture exists (seat_matrix_r1_2026.csv)"
-      - "No live download verified (HTTP 403 on portal)"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 13
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data."
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-    notes: "No historical data in repository. Archive access unverified."
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: seat_matrix
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY_WITH_LIMITATIONS
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: true
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations:
-      - "Only test fixture exists (allotments_r1_2026.csv)"
-      - "No live download verified"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 13
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data."
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_maharashtra
-    source_name: MAHA CET Cell (State CET Cell)
-    authority: State Common Entrance Test Cell, Maharashtra
-    dataset: allotments
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  # Karnataka - KEA
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY_WITH_LIMITATIONS
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: true
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations:
-      - "Only test fixture exists (seatmatrix_ka_r1_2026.csv)"
-      - "No live download verified"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 13
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data."
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-    notes: "No historical data in repository. Archive access unverified."
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: seat_matrix
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: READY_WITH_LIMITATIONS
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets:
-      - closing_rank
-      - opening_rank
-    limitations:
-      - "No test fixture exists"
-      - "No live download verified"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 12
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator, provenance complete. No fixture."
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_karnataka
-    source_name: Karnataka Examinations Authority (KEA)
-    authority: Karnataka Examinations Authority
-    dataset: allotments
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  # Uttar Pradesh - UPMU/DME UP
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: NOT_READY
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: true
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "Category/quota mappings explicitly PLACEHOLDER (must verify against real data)"
-      - "Only test fixture exists (seatmatrix_up_r1_2026.csv)"
-      - "No live download verified"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 10
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator exist BUT category/quota enums are placeholders. Gate 5/6 (category/quota validity) would fail on real data."
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-    notes: "No historical data in repository. Archive access unverified. Mappings unverified."
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: seat_matrix
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2026
-    round: "Round 1"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: VERIFIED
-    readiness: NOT_READY
-    contract_version: "1.0.0"
-    contract_exists: true
-    adapter_exists: true
-    validator_exists: true
-    provenance_complete: true
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "Category/quota mappings explicitly PLACEHOLDER"
-      - "No test fixture"
-      - "No live download verified"
-      - "No historical data (2021-2025)"
-    quality_gates_passed: 9
-    quality_gates_total: 15
-    notes: "Contract v1.0.0, adapter, validator exist BUT category/quota enums are placeholders."
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2025
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2024
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2023
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2022
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-  - source_id: mcc_state_uttar_pradesh
-    source_name: UPMU UP NEET UG
-    authority: Directorate of Medical Education, Uttar Pradesh
-    dataset: allotments
-    year: 2021
-    round: "All"
-    course: MBBS+BDS
-    quota: STATE_QUOTA
-    category: ALL
-    verification_status: NOT_VERIFIED
-    readiness: NOT_READY
-    contract_version: null
-    contract_exists: false
-    adapter_exists: false
-    validator_exists: false
-    provenance_complete: false
-    fixture_exists: false
-    raw_data_exists: false
-    supported_targets: []
-    limitations:
-      - "No contract implemented"
-      - "No adapter implemented"
-      - "No repository evidence"
-      - "Archive NOT VERIFIED per data_sources.yaml"
-      - "Category/quota mappings are PLACEHOLDERS"
-    quality_gates_passed: 0
-    quality_gates_total: 15
-
-# Summary statistics
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: seat_matrix
+  year: 2025
+  round: Round 1
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY
+  contract_version: 1.1.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: []
+  quality_gates_passed: 15
+  quality_gates_total: 15
+  notes: Full contract v1.1.0, adapter, validator, provenance, tests. Only Round 1
+    seat matrix.
+  lifecycle_stage: MODELLING_READY
+  evidence_status: MODELLING_READY
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: allotments
+  year: 2025
+  round: Round 3
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY
+  contract_version: 1.1.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: []
+  quality_gates_passed: 15
+  quality_gates_total: 15
+  notes: Full contract v1.1.0, adapter, validator, provenance, tests. PII blocklist
+    enforced.
+  lifecycle_stage: MODELLING_READY
+  evidence_status: MODELLING_READY
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: seat_matrix
+  year: 2021
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, 'No repository evidence
+      (fixtures, raw data, tests)', Config claims availability but zero repository
+      evidence, 'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: Documented in data_sources.yaml as available but NOT ingested. Automated
+    downloads blocked by bot protection (Sprint 3.1A live evidence). Manual retrieval
+    path documented but not executed. Cannot assume format compatibility without examining
+    actual source documents.
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: seat_matrix
+  year: 2022
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: "Zero repository evidence. Format compatibility UNKNOWN \u2014 cannot assume\
+    \ 2025 contract applies."
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: seat_matrix
+  year: 2023
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: "Zero repository evidence. Format compatibility UNKNOWN \u2014 cannot assume\
+    \ 2025 contract applies."
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: seat_matrix
+  year: 2024
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: "Zero repository evidence. Format compatibility UNKNOWN \u2014 cannot assume\
+    \ 2025 contract applies."
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: allotments
+  year: 2021
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, 'No repository evidence
+      (fixtures, raw data, tests)', Config claims availability but zero repository
+      evidence, 'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: Documented in data_sources.yaml as available but zero repository evidence.
+    Automated downloads blocked by bot protection (Sprint 3.1A live evidence). Manual
+    retrieval path documented but not executed. Cannot assume format compatibility
+    without examining actual source documents.
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: allotments
+  year: 2022
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: allotments
+  year: 2023
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_ug_archive
+  source_name: MCC UG Counselling Archive
+  authority: Medical Counselling Committee
+  dataset: allotments
+  year: 2024
+  round: All
+  course: MBBS+BDS+NURSING
+  quota: ALL_INDIA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    'AUTOMATED_DOWNLOAD_BLOCKED: HTTP 403 on archive downloads']
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY_WITH_LIMITATIONS
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: true
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: [Only test fixture exists (seat_matrix_r1_2026.csv), No live download
+      verified (HTTP 403 on portal), No historical data (2021-2025)]
+  quality_gates_passed: 13
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data.
+  lifecycle_stage: QUALITY_GATES_PASSED
+  evidence_status: READY_WITH_LIMITATIONS
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: No historical data in repository. Archive access unverified.
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: seat_matrix
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY_WITH_LIMITATIONS
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: true
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: [Only test fixture exists (allotments_r1_2026.csv), No live download
+      verified, No historical data (2021-2025)]
+  quality_gates_passed: 13
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data.
+  lifecycle_stage: QUALITY_GATES_PASSED
+  evidence_status: READY_WITH_LIMITATIONS
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_maharashtra
+  source_name: MAHA CET Cell (State CET Cell)
+  authority: State Common Entrance Test Cell, Maharashtra
+  dataset: allotments
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY_WITH_LIMITATIONS
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: true
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: [Only test fixture exists (seatmatrix_ka_r1_2026.csv), No live download
+      verified, No historical data (2021-2025)]
+  quality_gates_passed: 13
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator, provenance complete. Fixture-only data.
+  lifecycle_stage: QUALITY_GATES_PASSED
+  evidence_status: READY_WITH_LIMITATIONS
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: No historical data in repository. Archive access unverified.
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: seat_matrix
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: READY_WITH_LIMITATIONS
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: [closing_rank, opening_rank]
+  limitations: [No test fixture exists, No live download verified, No historical data
+      (2021-2025)]
+  quality_gates_passed: 12
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator, provenance complete. No fixture.
+  lifecycle_stage: QUALITY_GATES_PASSED
+  evidence_status: READY_WITH_LIMITATIONS
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_karnataka
+  source_name: Karnataka Examinations Authority (KEA)
+  authority: Karnataka Examinations Authority
+  dataset: allotments
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: NOT_READY
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: true
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [Category/quota mappings explicitly PLACEHOLDER (must verify against
+      real data), Only test fixture exists (seatmatrix_up_r1_2026.csv), No live download
+      verified, No historical data (2021-2025)]
+  quality_gates_passed: 10
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator exist BUT category/quota enums are placeholders.
+    Gate 5/6 (category/quota validity) would fail on real data.
+  lifecycle_stage: NOT_READY
+  evidence_status: NOT_READY
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  notes: No historical data in repository. Archive access unverified. Mappings unverified.
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: seat_matrix
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2026
+  round: Round 1
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: VERIFIED
+  readiness: NOT_READY
+  contract_version: 1.0.0
+  contract_exists: true
+  adapter_exists: true
+  validator_exists: true
+  provenance_complete: true
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [Category/quota mappings explicitly PLACEHOLDER, No test fixture, No
+      live download verified, No historical data (2021-2025)]
+  quality_gates_passed: 9
+  quality_gates_total: 15
+  notes: Contract v1.0.0, adapter, validator exist BUT category/quota enums are placeholders.
+  lifecycle_stage: NOT_READY
+  evidence_status: NOT_READY
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2025
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2024
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2023
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2022
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
+- source_id: mcc_state_uttar_pradesh
+  source_name: UPMU UP NEET UG
+  authority: Directorate of Medical Education, Uttar Pradesh
+  dataset: allotments
+  year: 2021
+  round: All
+  course: MBBS+BDS
+  quota: STATE_QUOTA
+  category: ALL
+  verification_status: NOT_VERIFIED
+  readiness: NOT_READY
+  contract_version: null
+  contract_exists: false
+  adapter_exists: false
+  validator_exists: false
+  provenance_complete: false
+  fixture_exists: false
+  raw_data_exists: false
+  supported_targets: []
+  limitations: [No contract implemented, No adapter implemented, No repository evidence,
+    Archive NOT VERIFIED per data_sources.yaml, Category/quota mappings are PLACEHOLDERS]
+  quality_gates_passed: 0
+  quality_gates_total: 15
+  lifecycle_stage: DISCOVERED
+  evidence_status: NOT_VERIFIED
 summary:
   total_datasets: 70
   ready: 2
@@ -1309,15 +1217,28 @@ summary:
     Maharashtra: []
     Karnataka: []
     Uttar_Pradesh: []
-  first_modelling_target: "NO_TARGET_READY"
+  first_modelling_target: NO_TARGET_READY
   minimum_years_for_temporal_validation: 3
   current_max_consecutive_years: 1
-  sprint_3_7_findings:
-    - "MCC 2021-2024: Config claims availability but ZERO repository evidence (NOT_VERIFIED)"
-    - "Maharashtra 2021-2025: Archive NOT VERIFIED per config, zero repository evidence"
-    - "Karnataka 2021-2025: Archive NOT VERIFIED per config, zero repository evidence"
-    - "Uttar Pradesh 2021-2025: Archive NOT VERIFIED per config, zero repository evidence"
-    - "UP category/quota mappings: Explicitly PLACEHOLDER — NOT_READY even if data downloaded"
-    - "Automated MCC downloads: BLOCKED (HTTP 403) — manual retrieval required"
-    - "Total verified modelling-ready years: 1 (MCC 2025 only)"
-    - "Temporal validation: IMPOSSIBLE (need ≥4 verified years, have 1)"
+  sprint_3_8_findings: ['MCC 2021-2024: Config claims availability but ZERO repository
+      evidence (NOT_VERIFIED)', "Automated MCC downloads: BLOCKED (HTTP 403) \u2014\
+      \ manual retrieval documented but not executed", "Format compatibility for 2021-2024:\
+      \ UNKNOWN \u2014 cannot assume 2025 contract applies without examining actual\
+      \ source documents", 'Maharashtra 2021-2025: Archive NOT VERIFIED per config,
+      zero repository evidence', 'Karnataka 2021-2025: Archive NOT VERIFIED per config,
+      zero repository evidence', 'Uttar Pradesh 2021-2025: Archive NOT VERIFIED per
+      config, zero repository evidence', "UP category/quota mappings: Explicitly PLACEHOLDER\
+      \ \u2014 NOT_READY even if data downloaded", 'Total verified modelling-ready
+      years: 1 (MCC 2025 only)', "Temporal validation: BLOCKED (need \u22653 verified\
+      \ years, have 1)", "No ML model trained \u2014 Sprint 3.8 is DATA VERIFICATION\
+      \ ONLY"]
+lifecycle_stages: [DISCOVERED, SOURCE_VERIFIED, RETRIEVED, HASHED, FORMAT_INSPECTED,
+  PII_SCREENED, CONTRACT_CHECKED, PARSED, VALIDATED, PROVENANCE_COMPLETE, IDEMPOTENCY_VERIFIED,
+  QUALITY_GATES_PASSED, MODELLING_READY, BLOCKED_AUTOMATED_DOWNLOAD, BLOCKED_FORMAT_INCOMPATIBLE,
+  BLOCKED_PII_DETECTED, BLOCKED_CONTRACT_INCOMPATIBLE, BLOCKED_PROVENANCE_INCOMPLETE,
+  BLOCKED_QUALITY_GATES_FAILED]
+evidence_statuses: [SOURCE_CLAIMED, SOURCE_VERIFIED, ARTIFACT_UNAVAILABLE, AUTOMATED_DOWNLOAD_BLOCKED,
+  MANUALLY_RETRIEVED, RETRIEVED, FORMAT_VERIFIED, FORMAT_UNKNOWN, FORMAT_MISMATCH,
+  PII_DETECTED, PII_CLEAR, PII_EXCLUDED, CONTRACT_COMPATIBLE, CONTRACT_COMPATIBLE_WITH_LIMITATIONS,
+  CONTRACT_INCOMPATIBLE, CONTRACT_UNKNOWN, VALIDATED, VALIDATED_WITH_LIMITATIONS,
+  NOT_VALIDATED, MODELLING_READY, READY_WITH_LIMITATIONS, NOT_READY]
