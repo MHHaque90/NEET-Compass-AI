@@ -1232,6 +1232,15 @@ summary:
       years: 1 (MCC 2025 only)', "Temporal validation: BLOCKED (need \u22653 verified\
       \ years, have 1)", "No ML model trained \u2014 Sprint 3.8 is DATA VERIFICATION\
       \ ONLY"]
+  sprint_4_1_findings: ['Sprint 4.1 re-audit: No new historical artifacts verified',
+      'MCC 2021-2024: Still AUTOMATED_DOWNLOAD_BLOCKED (HTTP 403), no manual retrieval executed',
+      'Maharashtra/Karnataka/UP 2021-2025: Archive access NOT VERIFIED, zero repository evidence',
+      'UP category/quota mappings: Remain PLACEHOLDERS — NOT_READY even if data obtained',
+      'Human artifact ingestion path: Created (etl/contracts/historical/human_ingestion.py)',
+      'Target investigation: NO_TARGET_READY (insufficient historical coverage, 1 year only)',
+      'Temporal validation: BLOCKED (1 verified year, need >=3)',
+      'Training status: TRAINING_BLOCKED (temporal blocked + no target)',
+      'No status changes in registry — all changes require actual evidence']
 lifecycle_stages: [DISCOVERED, SOURCE_VERIFIED, RETRIEVED, HASHED, FORMAT_INSPECTED,
   PII_SCREENED, CONTRACT_CHECKED, PARSED, VALIDATED, PROVENANCE_COMPLETE, IDEMPOTENCY_VERIFIED,
   QUALITY_GATES_PASSED, MODELLING_READY, BLOCKED_AUTOMATED_DOWNLOAD, BLOCKED_FORMAT_INCOMPATIBLE,
