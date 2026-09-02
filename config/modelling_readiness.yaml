@@ -1254,6 +1254,36 @@ summary:
       'Temporal validation: BLOCKED (1 verified year, need >=3)',
       'Training status: TRAINING_BLOCKED (temporal blocked + no target)',
       'No status changes in registry — all changes require actual evidence']
+  sprint_4_3_findings:
+    - 'Sprint 4.3 re-audit: No new historical artifacts verified'
+    - 'MCC 2021-2024: Still AUTOMATED_DOWNLOAD_BLOCKED (HTTP 403 confirmed 2026-08-31), no manual retrieval executed'
+    - 'Maharashtra/Karnataka/UP 2021-2025: Archive access NOT VERIFIED, zero repository evidence'
+    - 'UP category/quota mappings: Remain PLACEHOLDERS — NOT_READY even if data obtained'
+    - 'MCC contract v1.1.0 compatibility for 2021-2024: UNKNOWN without examining actual source documents'
+    - 'State contract v1.0.0: Fixture-based only — real historical format UNKNOWN'
+    - 'MCC archive re-probed 2026-08-31: HTTP 403 on both mcc.nic.in/ and archive-ug/'
+    - 'Human ingestion framework verified functional — no defects found'
+    - 'Target validation re-run: NO_TARGET_READY (insufficient historical coverage, 1 year only)'
+    - 'Temporal validation re-run: BLOCKED (1 verified year, need >=3)'
+    - 'Training status: TRAINING_BLOCKED (temporal blocked + no target)'
+    - 'No status changes in registry — all changes require actual evidence'
+  sprint_4_4_findings:
+    - 'Sprint 4.4 acquisition path established: Human ingestion framework verified sufficient, no defects found'
+    - 'Historical acquisition matrix created: 40 dataset/year combinations documented with evidence-based status'
+    - 'Official acquisition procedure published: docs/ml/historical-evidence-acquisition-sprint44.md'
+    - 'Evidence submission contract defined: docs/ml/evidence-submission-contract-sprint44.md'
+    - 'Acquisition lifecycle documented: docs/ml/acquisition-lifecycle-sprint44.md'
+    - 'MCC 2021-2024: Still AUTOMATED_DOWNLOAD_BLOCKED (HTTP 403), manual path documented but not executed'
+    - 'Maharashtra/Karnataka/UP 2021-2025: Archive access NOT VERIFIED, zero repository evidence'
+    - 'UP category/quota mappings: Remain PLACEHOLDERS — NOT_READY even if data obtained'
+    - 'MCC contract v1.1.0 compatibility for 2021-2024: UNKNOWN without examining actual source documents'
+    - 'State contract v1.0.0: Fixture-based only — real historical format UNKNOWN'
+    - 'Target readiness: NO_TARGET_READY (insufficient historical coverage, 1 year only)'
+    - 'Temporal validation: BLOCKED (1 verified year, need >=3)'
+    - 'Training status: TRAINING_BLOCKED (temporal blocked + no target)'
+    - 'No status changes in registry — all changes require actual evidence'
+    - '18 new deterministic tests added covering acquisition workflow and gate failures'
+    - 'All existing 719 tests continue to pass — no regressions'
 lifecycle_stages: [DISCOVERED, SOURCE_VERIFIED, RETRIEVED, HASHED, FORMAT_INSPECTED,
   PII_SCREENED, CONTRACT_CHECKED, PARSED, VALIDATED, PROVENANCE_COMPLETE, IDEMPOTENCY_VERIFIED,
   QUALITY_GATES_PASSED, MODELLING_READY, BLOCKED_AUTOMATED_DOWNLOAD, BLOCKED_FORMAT_INCOMPATIBLE,
